@@ -1,0 +1,1244 @@
+{
+  "info": {
+    "_postman_id": "9978f38d-eb65-4662-a8d9-14e620ba6c02",
+    "name": "RapiEntrega - Emilio Aguirre",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. Registrar cliente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idCliente\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/clientes",
+        "description": "Registra a Emilio Alejandro Aguirre Tronco con correo institucional y una dirección de demostración.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Emilio Alejandro Aguirre Tronco\",\n  \"correo\": \"202360079@ucc.mx\",\n  \"direccion\": \"Dirección de demostración en Veracruz\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "02. Consultar clientes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/clientes",
+        "description": "Consulta los clientes registrados."
+      }
+    },
+    {
+      "name": "03. Registrar restaurante",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idRestaurante\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/restaurantes",
+        "description": "Registra el restaurante con la ubicación utilizada para asignar el reparto.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Cocina de prueba\",\n  \"direccion\": \"Centro de Veracruz\",\n  \"latitud\": 19.17,\n  \"longitud\": -96.12\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "04. Registrar segundo restaurante",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idOtroRestaurante\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/restaurantes",
+        "description": "Prepara otro restaurante para comprobar que los productos no se mezclen.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Restaurante de prueba Norte\",\n  \"direccion\": \"Zona Norte\",\n  \"latitud\": 19.2,\n  \"longitud\": -96.15\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "05. Consultar restaurantes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/restaurantes",
+        "description": "Consulta los restaurantes disponibles."
+      }
+    },
+    {
+      "name": "06. Consultar un restaurante",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/restaurantes/{{idRestaurante}}",
+        "description": "Consulta los datos del restaurante elegido."
+      }
+    },
+    {
+      "name": "07. Registrar hamburguesa",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idHamburguesa\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/restaurantes/{{idRestaurante}}/productos",
+        "description": "Registra una hamburguesa con precio de setenta y cinco en el catálogo.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Hamburguesa\",\n  \"precio\": 75,\n  \"disponible\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "08. Registrar bebida",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idBebida\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/restaurantes/{{idRestaurante}}/productos",
+        "description": "Registra la bebida del restaurante con precio de veinticinco.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Agua de sabor\",\n  \"precio\": 25,\n  \"disponible\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "09. Registrar producto de otro restaurante",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idProductoAjeno\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/restaurantes/{{idOtroRestaurante}}/productos",
+        "description": "Prepara un producto perteneciente al segundo restaurante.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Taco de prueba\",\n  \"precio\": 35,\n  \"disponible\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "10. Consultar menú del restaurante",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/restaurantes/{{idRestaurante}}/productos",
+        "description": "Consulta los productos y precios del restaurante elegido."
+      }
+    },
+    {
+      "name": "11. Registrar pedido para comprobar el plazo",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idPedidoVencido\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos",
+        "description": "Prepara un pedido que se dejará sin aceptar para comprobar el plazo de cinco minutos.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"id\": {{idCliente}}\n  },\n  \"restaurante\": {\n    \"id\": {{idRestaurante}}\n  },\n  \"detalles\": [\n    {\n      \"producto\": {\n        \"id\": {{idHamburguesa}}\n      },\n      \"cantidad\": 2\n    },\n    {\n      \"producto\": {\n        \"id\": {{idBebida}}\n      },\n      \"cantidad\": 1\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "12. Pagar pedido que esperará aceptación",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pago aprobado\", () => pm.expect(pm.response.json().estado).to.eql(\"APROBADO\"));",
+              "pm.collectionVariables.set(\"verificarVencimientoDesde\", String(Date.now() + 300000));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos/{{idPedidoVencido}}/pagar",
+        "description": "Aprueba el pago simulado e inicia los cinco minutos disponibles para aceptar el pedido.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"tok_demo_aprobado\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "13. Registrar pedido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idPedido\", String(pm.response.json().id));",
+              "pm.test(\"Total calculado en catálogo\", () => pm.expect(pm.response.json().total).to.eql(175));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos",
+        "description": "Registra dos hamburguesas y una bebida; el servidor calcula ciento setenta y cinco usando los precios del catálogo.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"id\": {{idCliente}}\n  },\n  \"restaurante\": {\n    \"id\": {{idRestaurante}}\n  },\n  \"detalles\": [\n    {\n      \"producto\": {\n        \"id\": {{idHamburguesa}}\n      },\n      \"cantidad\": 2\n    },\n    {\n      \"producto\": {\n        \"id\": {{idBebida}}\n      },\n      \"cantidad\": 1\n    }\n  ],\n  \"total\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "14. Consultar pedidos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/pedidos",
+        "description": "Consulta los pedidos registrados y sus estados."
+      }
+    },
+    {
+      "name": "15. Consultar un pedido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}",
+        "description": "Consulta los detalles del pedido antes de realizar el pago."
+      }
+    },
+    {
+      "name": "16. Rechazar calificación antes de entregar",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/calificar",
+        "description": "Rechaza una calificación cuando el pedido todavía no se ha entregado.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"puntaje\": 5,\n  \"comentario\": \"Prueba de validación\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "17. Rechazar entrega anticipada",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/entregar",
+        "description": "Rechaza marcar como entregado un pedido que todavía no está en camino."
+      }
+    },
+    {
+      "name": "18. Pagar pedido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.collectionVariables.set(\"idPago\", String(pm.response.json().id));",
+              "pm.test(\"Pago aprobado\", () => pm.expect(pm.response.json().estado).to.eql(\"APROBADO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/pagar",
+        "description": "Procesa el pago con un token de demostración y obtiene la referencia de la pasarela simulada.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"tok_demo_aprobado\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "19. Consultar pago ya procesado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Mismo pago\", () => pm.expect(String(pm.response.json().id)).to.eql(pm.collectionVariables.get(\"idPago\")));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/pagar",
+        "description": "Repite la solicitud de pago y conserva el registro existente sin duplicar el cobro.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"tok_demo_aprobado\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "20. Aceptar pedido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pedido aceptado\", () => pm.expect(pm.response.json().estado).to.eql(\"ACEPTADO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/aceptar",
+        "description": "El restaurante acepta el pedido dentro del plazo; queda pendiente de asignar un repartidor disponible."
+      }
+    },
+    {
+      "name": "21. Registrar repartidor cercano",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idRepartidor\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/repartidores",
+        "description": "Registra un repartidor disponible cerca del restaurante.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Repartidor de prueba cercano\",\n  \"latitud\": 19.1701,\n  \"longitud\": -96.1201,\n  \"disponible\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "22. Registrar repartidor lejano",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idRepartidorLejano\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/repartidores",
+        "description": "Registra otro repartidor a mayor distancia para comprobar la selección.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Repartidor de prueba Norte\",\n  \"latitud\": 19.25,\n  \"longitud\": -96.18,\n  \"disponible\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "23. Consultar repartidores",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/repartidores",
+        "description": "Consulta los repartidores y su disponibilidad."
+      }
+    },
+    {
+      "name": "24. Asignar repartidor",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pedido asignado\", () => pm.expect(pm.response.json().estado).to.eql(\"ASIGNADO\"));",
+              "pm.test(\"Repartidor más cercano\", () => pm.expect(String(pm.response.json().repartidor.id)).to.eql(pm.collectionVariables.get(\"idRepartidor\")));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/asignar",
+        "description": "Asigna el repartidor disponible más cercano al restaurante y reserva su disponibilidad."
+      }
+    },
+    {
+      "name": "25. Consultar seguimiento inicial",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Estado asignado\", () => pm.expect(pm.response.json().estado).to.eql(\"ASIGNADO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/seguimiento",
+        "description": "Consulta el estado del pedido y la ubicación inicial del repartidor asignado."
+      }
+    },
+    {
+      "name": "26. Rechazar segunda asignación",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/asignar",
+        "description": "Rechaza asignar de nuevo un pedido que ya tiene repartidor."
+      }
+    },
+    {
+      "name": "27. Iniciar entrega",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pedido en camino\", () => pm.expect(pm.response.json().estado).to.eql(\"EN_CAMINO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/iniciar",
+        "description": "Registra el inicio del recorrido y cambia el pedido a en camino."
+      }
+    },
+    {
+      "name": "28. Actualizar ubicación",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Ubicación actualizada\", () => pm.expect(pm.response.json().latitud).to.eql(19.175));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/repartidores/{{idRepartidor}}/ubicacion",
+        "description": "Actualiza la ubicación del repartidor durante el recorrido activo.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"latitud\": 19.175,\n  \"longitud\": -96.125\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "29. Consultar ubicación del pedido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Nueva ubicación\", () => pm.expect(pm.response.json().latitud).to.eql(19.175));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/seguimiento",
+        "description": "Comprueba que el seguimiento muestra la ubicación actualizada."
+      }
+    },
+    {
+      "name": "30. Entregar pedido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pedido entregado\", () => pm.expect(pm.response.json().estado).to.eql(\"ENTREGADO\"));",
+              "pm.test(\"Comprobante del sistema heredado\", () => pm.expect(pm.response.json().folioFactura).to.match(/^FAC2012-/));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/entregar",
+        "description": "Confirma la entrega, libera al repartidor y registra el comprobante del sistema heredado simulado."
+      }
+    },
+    {
+      "name": "31. Calificar servicio",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.test(\"Calificación registrada\", () => pm.expect(pm.response.json().puntaje).to.eql(5));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/calificar",
+        "description": "Registra la calificación del servicio después de recibir el pedido.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"puntaje\": 5,\n  \"comentario\": \"Entrega recibida correctamente\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "32. Rechazar calificación duplicada",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/calificar",
+        "description": "Rechaza una segunda calificación del mismo pedido.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"puntaje\": 4,\n  \"comentario\": \"Segunda calificación de prueba\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "33. Consultar seguimiento por eventos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Flujo de eventos\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/event-stream\"));",
+              "pm.test(\"Estado final recibido\", () => pm.expect(pm.response.text()).to.include(\"ENTREGADO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedido}}/eventos",
+        "description": "Recibe el estado final del pedido mediante el flujo de eventos de seguimiento."
+      }
+    },
+    {
+      "name": "34. Registrar pedido para pago rechazado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idPedidoRechazado\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos",
+        "description": "Prepara otro pedido para comprobar la respuesta de un pago rechazado.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"id\": {{idCliente}}\n  },\n  \"restaurante\": {\n    \"id\": {{idRestaurante}}\n  },\n  \"detalles\": [\n    {\n      \"producto\": {\n        \"id\": {{idHamburguesa}}\n      },\n      \"cantidad\": 2\n    },\n    {\n      \"producto\": {\n        \"id\": {{idBebida}}\n      },\n      \"cantidad\": 1\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "35. Recibir pago rechazado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pago rechazado\", () => pm.expect(pm.response.json().estado).to.eql(\"RECHAZADO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos/{{idPedidoRechazado}}/pagar",
+        "description": "Registra el resultado rechazado de la pasarela; el pedido no queda pagado.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"tok_demo_rechazado\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "36. Registrar pedido para rechazo del restaurante",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"idPedidoCancelado\", String(pm.response.json().id));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos",
+        "description": "Prepara un pedido para comprobar cancelación y reembolso.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"id\": {{idCliente}}\n  },\n  \"restaurante\": {\n    \"id\": {{idRestaurante}}\n  },\n  \"detalles\": [\n    {\n      \"producto\": {\n        \"id\": {{idHamburguesa}}\n      },\n      \"cantidad\": 2\n    },\n    {\n      \"producto\": {\n        \"id\": {{idBebida}}\n      },\n      \"cantidad\": 1\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "37. Pagar pedido para comprobar reintento",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pago aprobado\", () => pm.expect(pm.response.json().estado).to.eql(\"APROBADO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos/{{idPedidoCancelado}}/pagar",
+        "description": "Aprueba un pago cuyo primer intento de reembolso tendrá una indisponibilidad simulada.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"token\": \"tok_demo_reembolso_pendiente\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "38. Rechazar pedido y solicitar reembolso",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pedido cancelado\", () => pm.expect(pm.response.json().estado).to.eql(\"CANCELADO\"));",
+              "pm.test(\"Reembolso pendiente\", () => pm.expect(pm.response.json().pago.estado).to.eql(\"REEMBOLSO_PENDIENTE\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedidoCancelado}}/rechazar",
+        "description": "Cancela el pedido rechazado por el restaurante y conserva el reembolso pendiente mientras la pasarela no lo confirma."
+      }
+    },
+    {
+      "name": "39. Rechazar producto de otro restaurante",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos",
+        "description": "Rechaza un producto que no pertenece al restaurante del pedido.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"id\": {{idCliente}}\n  },\n  \"restaurante\": {\n    \"id\": {{idRestaurante}}\n  },\n  \"detalles\": [\n    {\n      \"producto\": {\n        \"id\": {{idProductoAjeno}}\n      },\n      \"cantidad\": 1\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "40. Rechazar cantidad inválida",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseURL}}/pedidos",
+        "description": "Rechaza un detalle con cantidad igual a cero.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"id\": {{idCliente}}\n  },\n  \"restaurante\": {\n    \"id\": {{idRestaurante}}\n  },\n  \"detalles\": [\n    {\n      \"producto\": {\n        \"id\": {{idHamburguesa}}\n      },\n      \"cantidad\": 0\n    },\n    {\n      \"producto\": {\n        \"id\": {{idBebida}}\n      },\n      \"cantidad\": 1\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "41. Consultar pedido inexistente",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/999999999",
+        "description": "Devuelve un error al consultar un pedido que no existe."
+      }
+    },
+    {
+      "name": "42. Consultar cancelación por vencimiento",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const espera = Math.max(0, Number(pm.collectionVariables.get(\"verificarVencimientoDesde\")) + 6500 - Date.now());",
+              "if (espera > 0) setTimeout(function () {}, espera);"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Pedido cancelado por plazo\", () => pm.expect(pm.response.json().estado).to.eql(\"CANCELADO\"));",
+              "pm.test(\"Pago reembolsado\", () => pm.expect(pm.response.json().pago.estado).to.eql(\"REEMBOLSADO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedidoVencido}}",
+        "description": "Comprueba que el pedido sin aceptar se cancela y reembolsa al vencer los cinco minutos."
+      }
+    },
+    {
+      "name": "43. Consultar reembolso confirmado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Reembolso confirmado\", () => pm.expect(pm.response.json().pago.estado).to.eql(\"REEMBOLSADO\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseURL}}/pedidos/{{idPedidoCancelado}}",
+        "description": "Comprueba que la tarea programada volvió a intentar el reembolso y obtuvo su confirmación."
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": "http://localhost:8082/api/v1"
+    }
+  ]
+}

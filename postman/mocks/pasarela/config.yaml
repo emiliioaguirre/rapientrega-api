@@ -1,0 +1,11 @@
+version: 1
+id: 5f5d8c10-9032-4620-9130-b3a8c1b2a0ad
+name: Pasarela de práctica
+slug: pasarela-de-practica
+protocol: http
+interceptRequests: true
+port: 4900
+scenarios:
+  - name: default
+    path: ./default.js
+    default: true

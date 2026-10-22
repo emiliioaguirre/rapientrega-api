@@ -1,0 +1,5 @@
+simulation: rapientrega-local
+routing: path
+mocks:
+  - routeKey: pasarela
+    path: ../mocks/pasarela/config.yaml
