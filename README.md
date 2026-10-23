@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/rapientrega.svg" alt="Icono de RapiEntrega" width="112">
+  <img src="docs/assets/rapientrega.png" alt="Icono de RapiEntrega" width="112">
 </p>
 
 <h1 align="center">API de RapiEntrega</h1>
@@ -79,7 +79,6 @@ Crear la base desde MySQL Workbench y configurar las credenciales en un archivo 
 
 ```sql
 CREATE DATABASE IF NOT EXISTS rapientrega CHARACTER SET utf8mb4;
-CREATE DATABASE IF NOT EXISTS rapientrega_pruebas CHARACTER SET utf8mb4;
 ```
 
 | Variable | Uso |
@@ -89,7 +88,6 @@ CREATE DATABASE IF NOT EXISTS rapientrega_pruebas CHARACTER SET utf8mb4;
 | `DB_PASSWORD` | Contraseña local de MySQL. |
 | `PASARELA_URL` | Dirección del proveedor simulado. |
 | `PASARELA_SESION` | Sesión que separa los datos del proveedor de demostración. |
-| `TEST_DB_URL` | Base separada para las verificaciones de integración. |
 
 Ejecutar `RapientregaApplication.java` con **Run Java**.
 

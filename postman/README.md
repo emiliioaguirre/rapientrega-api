@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="../docs/assets/rapientrega.svg" alt="RapiEntrega" width="112">
+  <img src="assets/postman.svg" alt="Postman" width="160">
 </p>
 
 <h1 align="center">RapiEntrega en Postman</h1>
